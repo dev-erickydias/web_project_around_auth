@@ -1,0 +1,31 @@
+.button {
+  border: 2px solid #fff;
+  width: 150px;
+  height: 50px;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  justify-content: center;
+}
+
+
+.disability {
+  background: #fff;
+  cursor: not-allowed;
+  opacity: 20%;
+  color: black;
+}
+.disability:disabled {
+  background: #fff;
+  cursor: not-allowed;
+  opacity: 20%;
+  color: black;
+}
+@media (max-width: 768px) {
+  .button {
+    width: 282px;
+    height: 50px;
+  }
+}

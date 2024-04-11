@@ -1,0 +1,88 @@
+.card {
+  background-color: #fff;
+  width: 282px;
+  height: 361px;
+  border-radius: 10px;
+  position: relative;
+}
+.del {
+  display: none;
+}
+.del__hidden{
+  position: absolute;
+  top: 18px;
+  right: 15px;
+  width: 18px;
+  height: 19.3px;
+  opacity: 1;
+}
+.card__images {
+  min-width: 282px;
+  min-height: 282px;
+  max-width: 282px;
+  max-height: 282px;
+  border-radius: 10px 10px 0px 0px;
+}
+.card__image_popup {
+  position: fixed;
+  top: 25%;
+  left: 25%;
+  max-height: 75vh;
+  max-width: 75vh;
+  margin: -90px auto 90px;
+  opacity: 1;
+  visibility: visible;
+  transition: visibility 1s, opacity 1s linear;
+  z-index: 999;
+}
+.card__title {
+  margin: 25px auto 31px;
+  width: 200px;
+  height: 30px;
+  font-size: 24px;
+  font-weight: 900;
+  line-height: 29px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.popup__container-name {
+  width: 291px;
+  height: 12px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  text-align: left;
+  margin: 10px 0 0;
+}
+.card__unlike {
+  border: none;
+  width: 21px;
+  height: 19px;
+  position: absolute;
+  bottom: 25px;
+  right: 15px;
+  background-image: url(../image/unlike.png);
+}
+.card__unlike:hover {
+  cursor: pointer;
+}
+.card__like {
+  background-image: url(../image/liked.png);
+}
+.elements__like-count {
+  position: absolute;
+  bottom: 5px;
+  right: 22px;
+  color: black;
+  font-size: 13px;
+  font-family: Inter;
+  font-weight: 400;
+}
+@media (max-width: 768px) {
+  .card {
+    margin: 0 35px 0 0;
+  }
+}

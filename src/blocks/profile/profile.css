@@ -1,0 +1,78 @@
+.profile {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 2.8891rem;
+  width: 880px;
+  height: 120px;
+  margin: 40px auto 50px;
+}
+
+
+.profile_edit__conetener{
+  display: flex;
+  border-radius: 50%;
+  position: relative;
+  background-image: url(../../image/Lapiz__icon.png);
+  background-size: 26px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+@media (max-width: 768px) {
+  .profile {
+    width: 282px;
+    height: 286px;
+    justify-content: center;
+    justify-items: center;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+  }
+  .profile__container {
+    display: flex;
+    flex-direction: column;
+    width: 282px;
+    margin: 0 auto;
+  }
+  .profile__image {
+    margin: 0 auto;
+  }
+  .profile__titles {
+    align-items: center;
+    align-content: center;
+    margin: 30px 76px 14px 48px;
+  }
+  .profile__title {
+    width: 196px;
+    height: 22px;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 27px;
+    text-align: center;
+    padding-left: 25px;
+  }
+  .profile__subtitle {
+    width: 282px;
+    height: 14px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    text-align: center;
+    padding-bottom: 14px;
+    padding-left: 25px;
+  }
+
+
+  .nome {
+    width: 238px;
+    height: 26px;
+  }
+  .job {
+    width: 238px;
+    height: 26px;
+  }
+}
+
