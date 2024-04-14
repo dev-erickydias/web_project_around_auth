@@ -2,7 +2,7 @@
 @import url(../blocks/popups/popup.css);
 @import url(../blocks/popups/__opened/opened.css);
 
-
+@import url(../blocks/header.css);
 /* ==================================== import do estilo dos formularios ========================================= */
 @import url(../blocks/forms/__close/close.css);
 @import url(../blocks/forms/__image/image.css);

@@ -1,5 +1,5 @@
+import PopupWithForm from './PopupWithForm';
 import { useState, useEffect, useContext } from "react";
-import PopupWithForm from "./PopupWithForm";
 import { currentUserContext } from "../contexts/CurrentUserContext";
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
@@ -18,7 +18,9 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       name,
       about,
     });
+
   };
+
 
   return (
     <PopupWithForm
@@ -31,17 +33,17 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       <>
         <div className="popup__form-inputs">
           <input
+            value={name}
+            onChange={(event) => {
+              setName(event.target.value)
+            }}
             required
             type="text"
-            value={name}
             minLength={2}
             maxLength={40}
             name="nome"
             id="nome"
             className="popup__form-input popup__form-name"
-            onChange={(event) => {
-              setName(event.target.value);
-            }}
           />
           <span className="popup__form" id="span-input-name"></span>
         </div>
@@ -50,15 +52,14 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           <input
             required
             type="text"
-            value={about}
             name="job"
             id="job"
+            value={about}
+            onChange={(event) => {
+              setAbout(event.target.value)}}
             className="popup__form-input popup__form-job"
             minLength="2"
             maxLength="200"
-            onChange={(event) => {
-              setAbout(event.target.value);
-            }}
           />
           <span className="popup__form" id="span-input-job"></span>
         </div>

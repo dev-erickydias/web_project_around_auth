@@ -1,0 +1,25 @@
+.header {
+  border-bottom: 1px solid #545454;
+  width: 880px;
+  height: 74px;
+  margin: 45px auto 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header__logo {
+  max-width: 173px;
+  max-height: 33px;
+  padding-bottom: 32px;
+}
+.header a {
+  color: white;
+  text-decoration: none;
+  height: 25%;
+}
+
+@media screen and (max-width: 768px) {
+  .header__logo {
+    margin: 28px 550px 32px 27px;
+  }
+}

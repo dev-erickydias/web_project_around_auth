@@ -1,0 +1,64 @@
+.containerSignIn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.containerSignIn form {
+  height: 600px;
+  width: 500px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.containerSignIn form .envolver {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.containerSignIn form .envolver input {
+  outline: none;
+  border: none;
+  border-bottom: 2px solid white;
+  color: white;
+  width: 100%;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 400;
+  &::placeholder {
+    color: white;
+  }
+}
+
+.containerSignIn form .buttonAndMember {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+.containerSignIn form .buttonAndMember a {
+  color: white;
+  text-decoration: none;
+}
+
+.buttonAndMember button {
+  outline: none;
+  border: none;
+  width: 100%;
+  height: 50px;
+  font-size: 18px;
+  font-weight: 400;
+  padding: 3px;
+  background: white;
+  cursor: pointer;
+  transition: 0.3s;
+  &:hover {
+    background: #d3d3d3;
+  }
+}

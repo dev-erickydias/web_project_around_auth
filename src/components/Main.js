@@ -1,9 +1,6 @@
-import { useContext } from "react";
-import Card from "./Card.js";
-import edtImage from "../image/Lapiz__icon.png";
-import addImage from "../image/add__icon.png";
-import { currentUserContext } from "../contexts/CurrentUserContext.js";
-
+import Card from './Card.js';
+import edtImage from '../image/Lapiz__icon.png';
+import addImage from '../image/add__icon.png';
 
 function Main({
   cards,
@@ -14,33 +11,27 @@ function Main({
   onCardLike,
   onCardDelete,
 }) {
-  const currentUser = useContext(currentUserContext);
   return (
     <>
       <section className="profile">
         <div className="profile__container">
           <div className="profile_edit__conetener">
-          <img
-            src={currentUser.avatar}
-            onClick={onEditAvatarClick}
-            className="profile__image opacursor"
-            alt="profile"
-          />
+            <img
+              onClick={onEditAvatarClick}
+              className="profile__image opacursor"
+              alt="profile"
+            />
           </div>
-          
-          
+
           <div className="profile__titles">
             <div className="profile__content">
-              <h1 className="profile__title">{currentUser.name}</h1>
-              <button onClick={onEditProfileClick} className="profile__button opacursor abrir">
-                <img
-                  src={edtImage}
-                  className="edit"
-                  alt="icone de um lapiz"
-                />
+              <button
+                onClick={onEditProfileClick}
+                className="profile__button opacursor abrir"
+              >
+                <img src={edtImage} className="edit" alt="icone de um lapiz" />
               </button>
             </div>
-            <h2 className="profile__subtitle">{currentUser.about}</h2>
           </div>
         </div>
         <button
@@ -56,7 +47,13 @@ function Main({
       </section>
       <ul className="cards">
         {cards.map((card) => (
-          <Card cardData={card} key={card._id} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete}/>
+          <Card
+            cardData={card}
+            key={card._id}
+            onCardClick={onCardClick}
+            onCardLike={onCardLike}
+            onCardDelete={onCardDelete}
+          />
         ))}
       </ul>
       <section className="popup popup_delete">
