@@ -1,50 +1,36 @@
-import { useState, useEffect } from 'react'
-import Header from './Header';
-import Main from './Main';
-import Footer from './Footer';
-import api from '../utils/api.js';
-import { BrowserRouter as Router, Route, Routes/*, useNavigate*/ } from 'react-router-dom';
-import Login from './login.js';
-import Register from './register.js';
-import { currentUserContext } from '../contexts/CurrentUserContext.js';
-import AddPlacePopup from "./AddPlacePopup.js"
-import EditProfilePopup from "./EditProfilePopup.js"
+import { useState, useEffect } from "react";
 import EditAvatarPopup from "./EditAvatarPopup.js"
+import Header from "./Header";
+import Main from "./Main";
 import ImagePopup from "./ImagePopup";
-//import ProtectedRouter from './ProtectedRouter.js';
-//import * as auth from "../utils/auth.js"
-
+import Footer from "./Footer";
+import api from "../utils/api.js";
+import { currentUserContext } from "../contexts/CurrentUserContext.js";
+import AddPlacePopup from "./AddPlacePopup";
+import EditProfilePopup from "./EditProfilePopup.js";
 
 function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [selectedCard, setselectedCard] = useState(null);
+  const [currentUser, setCurrentUser] = useState({ name: "",about: "" });
   const [cards, setCards] = useState([]);
-  const [currentUser, setCurrentUser] = useState({
-    name: "",
-    about: "",
-    avatar: ""
-  })
-  //const [useEmail, setUseEmail] = useState()
- // const [isLoggedIn, setIsLoggedIn] = useState()
- // const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false)
- // const [isSuccess, setIsSuccess] = useState(false)
-
- 
 
   useEffect(() => {
     api
       .getUserInfo()
-      .then((res) => setCurrentUser(res))
+      .then(setCurrentUser)
       .catch((error) => console.log(error));
-  }, []);
-  useEffect(() => {
+
     api
       .getInitialCards()
       .then(setCards)
-      .catch((error) =>console.error('Erro ao buscar dados dos cartões:', error));
-  }, [])
+      .catch((error) => {
+        console.error("Erro ao buscar dados dos cartões:", error);
+      });
+  }, []);
+
   const handleUpdateUser = (userData) => {
     api
       .editProfile(userData)
@@ -56,7 +42,6 @@ function App() {
   };
 
   const handleUpdateAvatar = (userData) => {
-    console.log(userData)
     api
       .editAvatar(userData)
       .then((userInfo) => {
@@ -83,7 +68,7 @@ function App() {
       .changeLikeCardStatus(card._id, isLiked)
       .then((newCard) => {
         setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c)),
+          state.map((c) => (c._id === card._id ? newCard : c))
         );
       })
       .catch((error) => console.log(error));
@@ -109,35 +94,23 @@ function App() {
     <>
       <currentUserContext.Provider value={currentUser}>
         <Header />
-        <Router>
-          <Routes>
-            <Route path="/signin" element={<Login />} />
-            <Route path="/signup" element={<Register />} />
-            <Route
-              path="/"
-              element={
-                <Main
-                  cards={cards}
-                  onEditAvatarClick={() => {
-                    setEditAvatarPopupOpen(true);
-                  }}
-                  onEditProfileClick={() => {
-                    setEditProfilePopupOpen(true);
-                  }}
-                  onAddPlaceClick={() => {
-                    setAddPlacePopupOpen(true);
-                  }}
-                  onCardClick={(card) => {
-                    setselectedCard(card);
-                  }}
-                  onCardLike={handleCardLike}
-                  onCardDelete={handleCardDelete}
-                />
-              }
-            />
-          </Routes>
-        </Router>
-        <Footer />
+        <Main
+          cards={cards}
+          onEditAvatarClick={() => {
+            setEditAvatarPopupOpen(true);
+          }}
+          onEditProfileClick={() => {
+            setEditProfilePopupOpen(true);
+          }}
+          onAddPlaceClick={() => {
+            setAddPlacePopupOpen(true);
+          }}
+          onCardClick={(card) => {
+            setselectedCard(card);
+          }}
+          onCardLike={handleCardLike}
+          onCardDelete={handleCardDelete}
+        />
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
@@ -153,7 +126,9 @@ function App() {
           onClose={closeAllPopups}
           onAddPlaceSubmit={handleCreateNewCard}
         />
+
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+        <Footer />
       </currentUserContext.Provider>
     </>
   );

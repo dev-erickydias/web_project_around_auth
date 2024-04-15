@@ -27,7 +27,6 @@ class Api {
     });
   }
   editProfile(userData) {
-    console.log(userData)
     return fetch(`${this._baseUrl}/users/me`, {
         method: "PATCH",
         headers: this._headers,
@@ -104,7 +103,6 @@ class Api {
       body: JSON.stringify({ avatar: avatar }),
     }).then((res) => {
       if (res.ok) {
-        console.log(res)
         return res.json();
       }
 
