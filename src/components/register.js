@@ -35,7 +35,7 @@ const Register = ({handleRegister, handleRegisterError}) => {
           </div>
           <div className="buttonAndMember">
             <button type="submit">Entrar</button>
-            <Link to="/">Já é um membro? Inscreva-se aqui!</Link>
+            <Link to="/signin">Já é um membro? Faça login aqui!</Link>
           </div>
         </form>
       </div>
