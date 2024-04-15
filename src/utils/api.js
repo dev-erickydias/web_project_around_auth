@@ -102,6 +102,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({ avatar: avatar }),
     }).then((res) => {
+      console.log(res)
       if (res.ok) {
         return res.json();
       }

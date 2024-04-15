@@ -1,7 +1,9 @@
 import Card from './Card.js';
 import edtImage from '../image/Lapiz__icon.png';
 import addImage from '../image/add__icon.png';
-
+import { currentUserContext } from "../contexts/CurrentUserContext";
+import { useContext } from 'react';
+import Header from './Header.js';
 function Main({
   cards,
   onEditAvatarClick,
@@ -10,21 +12,40 @@ function Main({
   onCardClick,
   onCardLike,
   onCardDelete,
+  loggedIn,
+  userEmail,
+  handleLogout
 }) {
+  const currentUser = useContext(currentUserContext)
+
+  function handleHeader(){
+    const currentPath = window.location.pathname;
+    console.log(currentPath)
+    if (currentPath === "/") {
+      console.log("O path contém apenas '/'");
+      return<Header loggedIn={loggedIn} userEmail={userEmail} handleLogout={handleLogout} />
+  } else {
+      console.log("O path não contém apenas '/'");
+  }
+   // return<Header loggedIn={loggedIn} userEmail={userEmail} handleLogout={handleLogout} />
+  }
+
   return (
     <>
+      {handleHeader()}
       <section className="profile">
         <div className="profile__container">
           <div className="profile_edit__conetener">
             <img
+              src={currentUser.avatar}
               onClick={onEditAvatarClick}
               className="profile__image opacursor"
               alt="profile"
             />
           </div>
-
           <div className="profile__titles">
             <div className="profile__content">
+              <h1 className="profile__title">{currentUser.name}</h1>
               <button
                 onClick={onEditProfileClick}
                 className="profile__button opacursor abrir"
@@ -32,6 +53,7 @@ function Main({
                 <img src={edtImage} className="edit" alt="icone de um lapiz" />
               </button>
             </div>
+            <h2 className="profile__subtitle">{currentUser.about}</h2>
           </div>
         </div>
         <button

@@ -1,21 +1,24 @@
 import React, { useState } from 'react';
 import '../blocks/login.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import HeaderLoginAndRegister from './headerLogin';
 
 import * as auth from "../utils/auth"
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 const Login = ({handleLogin}) => {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const navigate = useNavigate()
-
+  const history = useHistory()
+  
   function handleSubmit(e){
-    e.preventDefalt()
-    auth.authorize(email, password).then((res)=>{
-      handleLogin()
-      navigate.push("/")
+    e.preventDefault();
+    
+    auth.authorize(email, password).then(()=>{
+      handleLogin(email)
+      history.push("/")
     })
+    
   }
 
 

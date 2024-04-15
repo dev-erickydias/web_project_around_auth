@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import EditAvatarPopup from "./EditAvatarPopup.js"
-import Header from "./Header";
 import Main from "./Main";
 import ImagePopup from "./ImagePopup";
 import Footer from "./Footer";
@@ -8,16 +7,45 @@ import api from "../utils/api.js";
 import { currentUserContext } from "../contexts/CurrentUserContext.js";
 import AddPlacePopup from "./AddPlacePopup";
 import EditProfilePopup from "./EditProfilePopup.js";
+import { Route } from 'react-router-dom';
+import Login from "./login";
+import Register from "./register";
+import * as auth from "../utils/auth.js";
+import { BrowserRouter, Switch } from "react-router-dom/cjs/react-router-dom.min.js";
+import ProtectedRoute from "./ProtectedRouter";
 
 function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [selectedCard, setselectedCard] = useState(null);
-  const [currentUser, setCurrentUser] = useState({ name: "",about: "" });
+  const [currentUser, setCurrentUser] = useState({ name: "", about: "" });
   const [cards, setCards] = useState([]);
 
+  const [loggedIn, setLoggedIn] = useState(
+    localStorage.getItem("loggedIn") ? true : false
+  );
+  const [userEmail, setUserEmail] = useState(
+    localStorage.getItem("userEmail")
+  );
+  
   useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      auth
+        .checkToken(token)
+        .then(() => {
+          setLoggedIn(true);
+          setUserEmail(localStorage.getItem("userEmail"));
+        })
+        .catch((error) => {
+          console.error("Erro ao verificar token:", error);
+          setLoggedIn(false);
+        });
+    } else {
+      setLoggedIn(false);
+    }
+    
     api
       .getUserInfo()
       .then(setCurrentUser)
@@ -30,7 +58,21 @@ function App() {
         console.error("Erro ao buscar dados dos cartões:", error);
       });
   }, []);
+  
+  const handleLogin = (email) => {
+    setLoggedIn(true);
+    setUserEmail(email);
+    localStorage.setItem("loggedIn", "true");
+    localStorage.setItem("userEmail", email);
+  };
 
+  const handleLogout = () => {
+    setLoggedIn(false);
+    setUserEmail("");
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("userEmail");
+    
+  };
   const handleUpdateUser = (userData) => {
     api
       .editProfile(userData)
@@ -89,28 +131,38 @@ function App() {
     setEditAvatarPopupOpen(false);
     setselectedCard(null);
   };
-
+  
   return (
-    <>
+    <BrowserRouter>
       <currentUserContext.Provider value={currentUser}>
-        <Header />
-        <Main
-          cards={cards}
-          onEditAvatarClick={() => {
-            setEditAvatarPopupOpen(true);
-          }}
-          onEditProfileClick={() => {
-            setEditProfilePopupOpen(true);
-          }}
-          onAddPlaceClick={() => {
-            setAddPlacePopupOpen(true);
-          }}
-          onCardClick={(card) => {
-            setselectedCard(card);
-          }}
-          onCardLike={handleCardLike}
-          onCardDelete={handleCardDelete}
-        />
+        <Switch>
+          <Route path="/signin">
+            <Login handleLogin={handleLogin} />
+          </Route>
+          <Route path="/signup">
+            <Register />
+          </Route>
+          <ProtectedRoute path="/"  loggedIn={loggedIn}>
+              <Main
+              cards={cards}
+              onEditAvatarClick={() => {
+                setEditAvatarPopupOpen(true);
+              }}
+              onEditProfileClick={() => {
+                setEditProfilePopupOpen(true);
+              }}
+              onAddPlaceClick={() => {
+                setAddPlacePopupOpen(true);
+              }}
+              onCardClick={(card) => {
+                setselectedCard(card);
+              }}
+              onCardLike={handleCardLike}
+              onCardDelete={handleCardDelete}
+              loggedIn={loggedIn} userEmail={userEmail} handleLogout={handleLogout}
+            />
+          </ProtectedRoute>
+        </Switch>
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
@@ -130,7 +182,8 @@ function App() {
         <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         <Footer />
       </currentUserContext.Provider>
-    </>
+    </BrowserRouter>
+
   );
 }
 

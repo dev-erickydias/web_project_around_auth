@@ -1,9 +1,15 @@
-import React from "react";
-import  {Route, useNavigate } from "react-router-dom"
+import React from 'react';
+import { Route, Redirect } from 'react-router-dom';
 
-const ProtectedRouter = ({component, isLoggedIn }) => {
-    const navigate = useNavigate()
-    return <Route path="/">{isLoggedIn ? component : navigate("/singup")}</Route>
-}
+const ProtectedRoute = ({Children, loggedIn, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={() => (
+        loggedIn ? Children : <Redirect to="/signin" />
+      )}
+    />
+  );
+};
 
-export default ProtectedRouter
+export default ProtectedRoute;
