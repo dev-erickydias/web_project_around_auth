@@ -34,7 +34,7 @@ const Register = ({handleRegister, handleRegisterError}) => {
             <input type="password" typeof="password" onChange={setPassword} placeholder="Senha" />
           </div>
           <div className="buttonAndMember">
-            <button type="submit">Entrar Nao sou Copy</button>
+            <button type="submit">Entrar</button>
             <Link to="/">Já é um membro? Inscreva-se aqui!</Link>
           </div>
         </form>
