@@ -42,3 +42,5 @@
 /* ==================================== divisoes de padroes ========================================= */
 @import url(../blocks/opacursor/opacursor.css);
 @import url(../blocks/orverlay/overlay.css);
+
+@import url(../blocks/infoToolTip.css);
