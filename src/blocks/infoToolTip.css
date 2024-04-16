@@ -75,9 +75,9 @@
   }
   
   .modal__icon_success {
-    background-image: url(/src/image/true.png);
+    background-image: url(../image/true.png);
   }
   
   .modal__icon_error {
-    background-image: url(/src/image/false.png);
+    background-image: url(../image/false.png);
   }

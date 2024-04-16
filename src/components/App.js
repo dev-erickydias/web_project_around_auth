@@ -21,7 +21,6 @@ function App() {
   const [selectedCard, setselectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState({ name: "", about: "" });
   const [cards, setCards] = useState([]);
-
   const [loggedIn, setLoggedIn] = useState(
     localStorage.getItem("loggedIn") ? true : false
   );
