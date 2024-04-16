@@ -18,7 +18,7 @@ const Register = ({handleRegister, handleRegisterError}) => {
         if (!res.data) {
           history.push("/signin");
          // handleRegister("success");
-         
+        
         } else {
          // handleRegisterError("error");
          console.log("deu errado", res)
@@ -28,6 +28,7 @@ const Register = ({handleRegister, handleRegisterError}) => {
         console.log(err);
       });
       localStorage.setItem("userEmail", email);
+
   }
   return (
     <>

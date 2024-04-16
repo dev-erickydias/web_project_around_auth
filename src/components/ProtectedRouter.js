@@ -1,15 +1,14 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-const ProtectedRoute = ({Children, loggedIn, ...rest }) => {
+const ProtectedRoute = ({children, loggedIn, ...rest }) => {
+  console.log(children)
+
   return (
-    <Route
-      {...rest}
-      render={() => (
-        loggedIn ? Children : <Redirect to="/signin" />
-      )}
-    />
+    <Route {...rest}>{loggedIn ? children : <Redirect to="/signin" />}</Route>
   );
 };
 
 export default ProtectedRoute;
+
+//render={loggedIn ? Children : <Redirect to="/signin" />}

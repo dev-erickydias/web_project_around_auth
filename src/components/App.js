@@ -28,9 +28,9 @@ function App() {
   const [userEmail, setUserEmail] = useState(
     localStorage.getItem("userEmail")
   );
-  
   useEffect(() => {
     const token = localStorage.getItem("jwt");
+
     if (token) {
       auth
         .checkToken(token)
@@ -45,7 +45,7 @@ function App() {
     } else {
       setLoggedIn(false);
     }
-    
+
     api
       .getUserInfo()
       .then(setCurrentUser)
@@ -58,7 +58,7 @@ function App() {
         console.error("Erro ao buscar dados dos cartões:", error);
       });
   }, []);
-  
+
   const handleLogin = (email) => {
     setLoggedIn(true);
     setUserEmail(email);
@@ -71,7 +71,7 @@ function App() {
     setUserEmail("");
     localStorage.removeItem("loggedIn");
     localStorage.removeItem("userEmail");
-    
+
   };
   const handleUpdateUser = (userData) => {
     api
@@ -131,7 +131,7 @@ function App() {
     setEditAvatarPopupOpen(false);
     setselectedCard(null);
   };
-  
+  console.log(loggedIn)
   return (
     <BrowserRouter>
       <currentUserContext.Provider value={currentUser}>
@@ -142,8 +142,8 @@ function App() {
           <Route path="/signup">
             <Register />
           </Route>
-          <ProtectedRoute path="/"  loggedIn={loggedIn}>
-              <Main
+          <ProtectedRoute path="/" loggedIn={loggedIn}>
+            <Main
               cards={cards}
               onEditAvatarClick={() => {
                 setEditAvatarPopupOpen(true);
