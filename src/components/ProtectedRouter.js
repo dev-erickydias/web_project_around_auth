@@ -10,5 +10,3 @@ const ProtectedRoute = ({children, loggedIn, ...rest }) => {
 };
 
 export default ProtectedRoute;
-
-//render={loggedIn ? Children : <Redirect to="/signin" />}

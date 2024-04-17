@@ -45,8 +45,8 @@ const Login = ({ handleLogin }) => {
         <form onSubmit={handleSubmit}>
           <div className="envolver">
             <h1>Entrar</h1>
-            <input type="text" onChange={(e) => setEmail(e.target.value)} typeof="email" placeholder="E-mail" />
-            <input type="password" onChange={(e) => setPassword(e.target.value)} typeof="password" placeholder="Senha" />
+            <input type="text" required onChange={(e) => setEmail(e.target.value)} typeof="email" placeholder="E-mail" />
+            <input type="password" minLength={2} required onChange={(e) => setPassword(e.target.value)} typeof="password" placeholder="Senha" />
           </div>
           <div className="buttonAndMember">
             <button type="submit">Entrar</button>

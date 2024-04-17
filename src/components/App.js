@@ -70,7 +70,7 @@ function App() {
     setUserEmail("");
     localStorage.removeItem("loggedIn");
     localStorage.removeItem("userEmail");
-
+    localStorage.removeItem("jwt");
   };
   const handleUpdateUser = (userData) => {
     api
@@ -130,7 +130,6 @@ function App() {
     setEditAvatarPopupOpen(false);
     setselectedCard(null);
   };
-  console.log(loggedIn)
   return (
     <BrowserRouter>
       <currentUserContext.Provider value={currentUser}>

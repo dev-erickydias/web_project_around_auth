@@ -17,22 +17,11 @@ function Main({
   handleLogout
 }) {
   const currentUser = useContext(currentUserContext)
-
-  function handleHeader(){
-    const currentPath = window.location.pathname;
-    console.log(currentPath)
-    if (currentPath === "/") {
-      console.log("O path contém apenas '/'");
-      return<Header loggedIn={loggedIn} userEmail={userEmail} handleLogout={handleLogout} />
-  } else {
-      console.log("O path não contém apenas '/'");
-  }
-   // return<Header loggedIn={loggedIn} userEmail={userEmail} handleLogout={handleLogout} />
-  }
+  const isHome = window.location.pathname === '/'
 
   return (
     <>
-      {handleHeader()}
+      {isHome && <Header loggedIn={loggedIn} userEmail={userEmail} handleLogout={handleLogout} />}
       <section className="profile">
         <div className="profile__container">
           <div className="profile_edit__conetener">
